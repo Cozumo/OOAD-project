@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_proj_OOADModelStoreContainer" CdmEntityContainer="DB_proj_OOADEntities">
+    <EntitySetMapping Name="AssingedCourses">
+      <EntityTypeMapping TypeName="DB_proj_OOADModel.AssingedCourse">
+        <MappingFragment StoreEntitySet="AssingedCourse">
+          <ScalarProperty Name="ACourses_id" ColumnName="ACourses_id" />
+          <ScalarProperty Name="Acourse_name" ColumnName="Acourse_name" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+          <ScalarProperty Name="Student" ColumnName="Student" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClassSchedules">
+      <EntityTypeMapping TypeName="DB_proj_OOADModel.ClassSchedule">
+        <MappingFragment StoreEntitySet="ClassSchedule">
+          <ScalarProperty Name="clsScd" ColumnName="clsScd" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="scd_date" ColumnName="scd_date" />
+          <ScalarProperty Name="S_semester" ColumnName="S_semester" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="DB_proj_OOADModel.Course">
+        <MappingFragment StoreEntitySet="Course">
+          <ScalarProperty Name="course_id" ColumnName="course_id" />
+          <ScalarProperty Name="course_name" ColumnName="course_name" />
+          <ScalarProperty Name="course_hrs" ColumnName="course_hrs" />
+          <ScalarProperty Name="course_depart" ColumnName="course_depart" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="DB_proj_OOADModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="D_id" ColumnName="D_id" />
+          <ScalarProperty Name="D_name" ColumnName="D_name" />
+          <ScalarProperty Name="D_Building" ColumnName="D_Building" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="DB_proj_OOADModel.Event">
+        <MappingFragment StoreEntitySet="Event">
+          <ScalarProperty Name="e_id" ColumnName="e_id" />
+          <ScalarProperty Name="e_name" ColumnName="e_name" />
+          <ScalarProperty Name="e_desc" ColumnName="e_desc" />
+          <ScalarProperty Name="S_semester" ColumnName="S_semester" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExamSchedules">
+      <EntityTypeMapping TypeName="DB_proj_OOADModel.ExamSchedule">
+        <MappingFragment StoreEntitySet="ExamSchedule">
+          <ScalarProperty Name="Ex_Scd_id" ColumnName="Ex_Scd_id" />
+          <ScalarProperty Name="Ex_Sem" ColumnName="Ex_Sem" />
+          <ScalarProperty Name="Ex_courses" ColumnName="Ex_courses" />
+          <ScalarProperty Name="S_semester" ColumnName="S_semester" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Semesters">
+      <EntityTypeMapping TypeName="DB_proj_OOADModel.Semester">
+        <MappingFragment StoreEntitySet="Semester">
+          <ScalarProperty Name="Semester_id" ColumnName="Semester_id" />
+          <ScalarProperty Name="Semester_name" ColumnName="Semester_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Staffs">
+      <EntityTypeMapping TypeName="DB_proj_OOADModel.Staff">
+        <MappingFragment StoreEntitySet="Staff">
+          <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+          <ScalarProperty Name="staff_pass" ColumnName="staff_pass" />
+          <ScalarProperty Name="staff_name" ColumnName="staff_name" />
+          <ScalarProperty Name="staff_salary" ColumnName="staff_salary" />
+          <ScalarProperty Name="staff_dty" ColumnName="staff_dty" />
+          <ScalarProperty Name="staff_depart" ColumnName="staff_depart" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="DB_proj_OOADModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="S_id" ColumnName="S_id" />
+          <ScalarProperty Name="S_pass" ColumnName="S_pass" />
+          <ScalarProperty Name="S_name" ColumnName="S_name" />
+          <ScalarProperty Name="S_fees" ColumnName="S_fees" />
+          <ScalarProperty Name="S_cgpa" ColumnName="S_cgpa" />
+          <ScalarProperty Name="S_semester" ColumnName="S_semester" />
+          <ScalarProperty Name="S_major" ColumnName="S_major" />
+          <ScalarProperty Name="S_depart" ColumnName="S_depart" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teachers">
+      <EntityTypeMapping TypeName="DB_proj_OOADModel.Teacher">
+        <MappingFragment StoreEntitySet="Teacher">
+          <ScalarProperty Name="T_id" ColumnName="T_id" />
+          <ScalarProperty Name="T_pass" ColumnName="T_pass" />
+          <ScalarProperty Name="T_name" ColumnName="T_name" />
+          <ScalarProperty Name="T_salary" ColumnName="T_salary" />
+          <ScalarProperty Name="T_Depart" ColumnName="T_Depart" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransDetails">
+      <EntityTypeMapping TypeName="DB_proj_OOADModel.TransDetail">
+        <MappingFragment StoreEntitySet="TransDetail">
+          <ScalarProperty Name="trans_id" ColumnName="trans_id" />
+          <ScalarProperty Name="trans_details" ColumnName="trans_details" />
+          <ScalarProperty Name="trans_date" ColumnName="trans_date" />
+          <ScalarProperty Name="Student" ColumnName="Student" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

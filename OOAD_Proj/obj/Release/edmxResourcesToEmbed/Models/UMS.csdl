@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_proj_OOADModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AssingedCourse">
+    <Key>
+      <PropertyRef Name="ACourses_id" />
+    </Key>
+    <Property Name="ACourses_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Acourse_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Course" Type="Int32" />
+    <Property Name="Teacher" Type="Int32" />
+    <Property Name="Student" Type="Int32" />
+    <NavigationProperty Name="Course1" Relationship="Self.FK__AssingedC__Cours__5812160E" FromRole="AssingedCourse" ToRole="Course" />
+    <NavigationProperty Name="Student1" Relationship="Self.FK__AssingedC__Stude__59FA5E80" FromRole="AssingedCourse" ToRole="Student" />
+    <NavigationProperty Name="Teacher1" Relationship="Self.FK__AssingedC__Teach__59063A47" FromRole="AssingedCourse" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="ClassSchedule">
+    <Key>
+      <PropertyRef Name="clsScd" />
+    </Key>
+    <Property Name="clsScd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Course" Type="Int32" />
+    <Property Name="scd_date" Type="DateTime" Precision="0" />
+    <Property Name="S_semester" Type="Int32" />
+    <NavigationProperty Name="Course1" Relationship="Self.FK__ClassSche__Cours__66603565" FromRole="ClassSchedule" ToRole="Course" />
+    <NavigationProperty Name="Semester" Relationship="Self.FK__ClassSche__S_sem__6754599E" FromRole="ClassSchedule" ToRole="Semester" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="course_id" />
+    </Key>
+    <Property Name="course_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="course_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="course_hrs" Type="Int32" />
+    <Property Name="course_depart" Type="Int32" />
+    <NavigationProperty Name="AssingedCourses" Relationship="Self.FK__AssingedC__Cours__5812160E" FromRole="Course" ToRole="AssingedCourse" />
+    <NavigationProperty Name="ClassSchedules" Relationship="Self.FK__ClassSche__Cours__66603565" FromRole="Course" ToRole="ClassSchedule" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Course__course_d__5535A963" FromRole="Course" ToRole="Department" />
+    <NavigationProperty Name="ExamSchedules" Relationship="Self.FK__ExamSched__Cours__60A75C0F" FromRole="Course" ToRole="ExamSchedule" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="D_id" />
+    </Key>
+    <Property Name="D_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="D_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="D_Building" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Courses" Relationship="Self.FK__Course__course_d__5535A963" FromRole="Department" ToRole="Course" />
+    <NavigationProperty Name="Staffs" Relationship="Self.FK__Staff__staff_dep__5CD6CB2B" FromRole="Department" ToRole="Staff" />
+    <NavigationProperty Name="Students" Relationship="Self.FK__Student__S_depar__4F7CD00D" FromRole="Department" ToRole="Student" />
+    <NavigationProperty Name="Teachers" Relationship="Self.FK__Teacher__T_Depar__52593CB8" FromRole="Department" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="e_id" />
+    </Key>
+    <Property Name="e_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="e_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="e_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="S_semester" Type="Int32" />
+    <NavigationProperty Name="Semester" Relationship="Self.FK__Event__S_semeste__6383C8BA" FromRole="Event" ToRole="Semester" />
+  </EntityType>
+  <EntityType Name="ExamSchedule">
+    <Key>
+      <PropertyRef Name="Ex_Scd_id" />
+    </Key>
+    <Property Name="Ex_Scd_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ex_Sem" Type="Int32" />
+    <Property Name="Ex_courses" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="S_semester" Type="Int32" />
+    <Property Name="Course" Type="Int32" />
+    <NavigationProperty Name="Course1" Relationship="Self.FK__ExamSched__Cours__60A75C0F" FromRole="ExamSchedule" ToRole="Course" />
+    <NavigationProperty Name="Semester" Relationship="Self.FK__ExamSched__S_sem__5FB337D6" FromRole="ExamSchedule" ToRole="Semester" />
+  </EntityType>
+  <EntityType Name="Semester">
+    <Key>
+      <PropertyRef Name="Semester_id" />
+    </Key>
+    <Property Name="Semester_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Semester_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ClassSchedules" Relationship="Self.FK__ClassSche__S_sem__6754599E" FromRole="Semester" ToRole="ClassSchedule" />
+    <NavigationProperty Name="Events" Relationship="Self.FK__Event__S_semeste__6383C8BA" FromRole="Semester" ToRole="Event" />
+    <NavigationProperty Name="ExamSchedules" Relationship="Self.FK__ExamSched__S_sem__5FB337D6" FromRole="Semester" ToRole="ExamSchedule" />
+    <NavigationProperty Name="Students" Relationship="Self.FK__Student__S_semes__4E88ABD4" FromRole="Semester" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="staff_id" />
+    </Key>
+    <Property Name="staff_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="staff_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="staff_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="staff_salary" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="staff_dty" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="staff_depart" Type="Int32" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Staff__staff_dep__5CD6CB2B" FromRole="Staff" ToRole="Department" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="S_id" />
+    </Key>
+    <Property Name="S_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="S_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="S_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="S_fees" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="S_cgpa" Type="Double" />
+    <Property Name="S_semester" Type="Int32" />
+    <Property Name="S_major" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="S_depart" Type="Int32" />
+    <NavigationProperty Name="AssingedCourses" Relationship="Self.FK__AssingedC__Stude__59FA5E80" FromRole="Student" ToRole="AssingedCourse" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Student__S_depar__4F7CD00D" FromRole="Student" ToRole="Department" />
+    <NavigationProperty Name="Semester" Relationship="Self.FK__Student__S_semes__4E88ABD4" FromRole="Student" ToRole="Semester" />
+    <NavigationProperty Name="TransDetails" Relationship="Self.FK__TransDeta__Stude__6A30C649" FromRole="Student" ToRole="TransDetail" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="T_id" />
+    </Key>
+    <Property Name="T_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="T_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="T_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="T_salary" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="T_Depart" Type="Int32" />
+    <NavigationProperty Name="AssingedCourses" Relationship="Self.FK__AssingedC__Teach__59063A47" FromRole="Teacher" ToRole="AssingedCourse" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Teacher__T_Depar__52593CB8" FromRole="Teacher" ToRole="Department" />
+  </EntityType>
+  <EntityType Name="TransDetail">
+    <Key>
+      <PropertyRef Name="trans_id" />
+    </Key>
+    <Property Name="trans_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="trans_details" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="trans_date" Type="DateTime" Precision="0" />
+    <Property Name="Student" Type="Int32" />
+    <NavigationProperty Name="Student1" Relationship="Self.FK__TransDeta__Stude__6A30C649" FromRole="TransDetail" ToRole="Student" />
+  </EntityType>
+  <Association Name="FK__AssingedC__Cours__5812160E">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="AssingedCourse" Type="Self.AssingedCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="course_id" />
+      </Principal>
+      <Dependent Role="AssingedCourse">
+        <PropertyRef Name="Course" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AssingedC__Stude__59FA5E80">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="AssingedCourse" Type="Self.AssingedCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="S_id" />
+      </Principal>
+      <Dependent Role="AssingedCourse">
+        <PropertyRef Name="Student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AssingedC__Teach__59063A47">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="AssingedCourse" Type="Self.AssingedCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="T_id" />
+      </Principal>
+      <Dependent Role="AssingedCourse">
+        <PropertyRef Name="Teacher" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClassSche__Cours__66603565">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="ClassSchedule" Type="Self.ClassSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="course_id" />
+      </Principal>
+      <Dependent Role="ClassSchedule">
+        <PropertyRef Name="Course" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClassSche__S_sem__6754599E">
+    <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
+    <End Role="ClassSchedule" Type="Self.ClassSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="Semester_id" />
+      </Principal>
+      <Dependent Role="ClassSchedule">
+        <PropertyRef Name="S_semester" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__course_d__5535A963">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="D_id" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="course_depart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ExamSched__Cours__60A75C0F">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="ExamSchedule" Type="Self.ExamSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="course_id" />
+      </Principal>
+      <Dependent Role="ExamSchedule">
+        <PropertyRef Name="Course" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__staff_dep__5CD6CB2B">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="D_id" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="staff_depart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__S_depar__4F7CD00D">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="D_id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="S_depart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teacher__T_Depar__52593CB8">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="D_id" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="T_Depart" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Event__S_semeste__6383C8BA">
+    <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
+    <End Role="Event" Type="Self.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="Semester_id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="S_semester" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ExamSched__S_sem__5FB337D6">
+    <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
+    <End Role="ExamSchedule" Type="Self.ExamSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="Semester_id" />
+      </Principal>
+      <Dependent Role="ExamSchedule">
+        <PropertyRef Name="S_semester" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__S_semes__4E88ABD4">
+    <End Role="Semester" Type="Self.Semester" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Semester">
+        <PropertyRef Name="Semester_id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="S_semester" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TransDeta__Stude__6A30C649">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="TransDetail" Type="Self.TransDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="S_id" />
+      </Principal>
+      <Dependent Role="TransDetail">
+        <PropertyRef Name="Student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_proj_OOADEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AssingedCourses" EntityType="Self.AssingedCourse" />
+    <EntitySet Name="ClassSchedules" EntityType="Self.ClassSchedule" />
+    <EntitySet Name="Courses" EntityType="Self.Course" />
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="Events" EntityType="Self.Event" />
+    <EntitySet Name="ExamSchedules" EntityType="Self.ExamSchedule" />
+    <EntitySet Name="Semesters" EntityType="Self.Semester" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+    <EntitySet Name="TransDetails" EntityType="Self.TransDetail" />
+    <AssociationSet Name="FK__AssingedC__Cours__5812160E" Association="Self.FK__AssingedC__Cours__5812160E">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="AssingedCourse" EntitySet="AssingedCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AssingedC__Stude__59FA5E80" Association="Self.FK__AssingedC__Stude__59FA5E80">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="AssingedCourse" EntitySet="AssingedCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AssingedC__Teach__59063A47" Association="Self.FK__AssingedC__Teach__59063A47">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="AssingedCourse" EntitySet="AssingedCourses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClassSche__Cours__66603565" Association="Self.FK__ClassSche__Cours__66603565">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="ClassSchedule" EntitySet="ClassSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClassSche__S_sem__6754599E" Association="Self.FK__ClassSche__S_sem__6754599E">
+      <End Role="Semester" EntitySet="Semesters" />
+      <End Role="ClassSchedule" EntitySet="ClassSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__course_d__5535A963" Association="Self.FK__Course__course_d__5535A963">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Course" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ExamSched__Cours__60A75C0F" Association="Self.FK__ExamSched__Cours__60A75C0F">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="ExamSchedule" EntitySet="ExamSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__staff_dep__5CD6CB2B" Association="Self.FK__Staff__staff_dep__5CD6CB2B">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Staff" EntitySet="Staffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__S_depar__4F7CD00D" Association="Self.FK__Student__S_depar__4F7CD00D">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teacher__T_Depar__52593CB8" Association="Self.FK__Teacher__T_Depar__52593CB8">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Teacher" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Event__S_semeste__6383C8BA" Association="Self.FK__Event__S_semeste__6383C8BA">
+      <End Role="Semester" EntitySet="Semesters" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ExamSched__S_sem__5FB337D6" Association="Self.FK__ExamSched__S_sem__5FB337D6">
+      <End Role="Semester" EntitySet="Semesters" />
+      <End Role="ExamSchedule" EntitySet="ExamSchedules" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__S_semes__4E88ABD4" Association="Self.FK__Student__S_semes__4E88ABD4">
+      <End Role="Semester" EntitySet="Semesters" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TransDeta__Stude__6A30C649" Association="Self.FK__TransDeta__Stude__6A30C649">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="TransDetail" EntitySet="TransDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
